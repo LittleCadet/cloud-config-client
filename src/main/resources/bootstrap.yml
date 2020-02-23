@@ -1,0 +1,42 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: cloud-config-client
+  cloud:
+    discovery:
+      #开启发现服务功能
+      enabled: true
+      service-id: cloud-config-server
+    config:
+      #默认true：配置从config读取，而不是本地的配置文件
+      #enabled: true
+      name: cloud-service
+      #配置中心地址
+      uri: http://127.0.0.1:8085
+      #配置中心拉取的配置文件git库的profile
+      profile: dev
+      #配置中心拉取的配置文件git库的分支
+      label: develop
+
+management:
+  endpoint:
+    health:
+      #默认是never
+      show-details: always
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://admin:admin123@127.0.0.1:8761/eureka/
+#
+#    #健康检查（需要spring-boot-starter-actuator依赖）
+#    healthcheck:
+#      enabled: true
+#  instance:
+#    # 续约更新时间间隔（默认30秒）
+#    lease-renewal-interval-in-seconds: 10
+#    # 续约到期时间（默认90秒）
+#    lease-expiration-duration-in-seconds: 30
