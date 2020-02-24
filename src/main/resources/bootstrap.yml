@@ -5,20 +5,20 @@ spring:
   application:
     name: cloud-config-client
   cloud:
-    discovery:
-      #开启发现服务功能
-      enabled: true
-      service-id: cloud-config-server
     config:
       #默认true：配置从config读取，而不是本地的配置文件
       #enabled: true
       name: cloud-service
       #配置中心地址
-      uri: http://127.0.0.1:8085
+      #uri: http://127.0.0.1:8085
       #配置中心拉取的配置文件git库的profile
-      profile: dev
+      profile: pro
       #配置中心拉取的配置文件git库的分支
       label: develop
+      discovery:
+        #开启发现服务功能,默认为false
+        enabled: true
+        service-id: cloud-config-server
 
 management:
   endpoint:
@@ -26,13 +26,19 @@ management:
       #默认是never
       show-details: always
 
+  endpoints:
+    web:
+      exposure:
+        # "*":代表暴露actuator所有节点，如果只暴露指定节点，那么节点之间用“，”分隔开
+        include: "*"
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://admin:admin123@127.0.0.1:8761/eureka/
-#
-#    #健康检查（需要spring-boot-starter-actuator依赖）
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin123@127.0.0.1:8761/eureka/
+
+    #健康检查（需要spring-boot-starter-actuator依赖）
 #    healthcheck:
 #      enabled: true
 #  instance:
